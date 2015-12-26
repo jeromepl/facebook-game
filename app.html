@@ -10,13 +10,17 @@
         <!-- Bootstrap -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
-        <link rel="stylesheet" href="css/home.css">
+        <!-- Styles -->
+        <link rel="stylesheet" href="css/app.css">
 
     </head>
-   
-    <body ng-app="facebookApp" id="bootstrap-overrides">
 
+    <body ng-app="facebookApp" ng-controller="MainController" id="bootstrap-overrides">
+
+       <!-- Facebook Scripts -->
         <script>
+            var app;
+
             window.fbAsyncInit = function() {
             FB.init({
               appId      : '739207966223708',
@@ -57,14 +61,10 @@
         </script>
         <!-- End of facebook scripts -->
 
-        <div ng-controller="MainController" class="container">
-            <h1 id="fb-welcome"></h1>
 
-            <div id="home-buttons" class="center-block">
-                <button class="btn btn-default center-block">Send a Message</button>
-                <button class="btn btn-default center-block">Invite Friends</button>
-            </div>
-        </div>
+        <home-view class="container" ng-show="isHomeVisible"></home-view>
+        <send-view class="container" ng-show="isSendVisible"></send-view>
+
 
         <!-- Libs -->
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
@@ -74,5 +74,14 @@
 
         <!-- Angular Controllers -->
         <script src="js/controllers/MainController.js"></script>
+        <script src="js/controllers/HomeController.js"></script>
+        <script src="js/controllers/SendController.js"></script>
+
+        <!-- Angular Directives -->
+        <script src="js/directives/homeView.js"></script>
+        <script src="js/directives/sendView.js"></script>
+
+        <!-- Angular Services -->
+        <script src="js/services/facebookService.js"></script>
     </body>
 </html>

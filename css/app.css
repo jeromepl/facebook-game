@@ -6,11 +6,15 @@ body {
     width: 100%;
 }
 
+.center-block {
+	float: none;
+}
+
 #bootstrap-overrides .container {
     text-align: center;
 }
 
-#bootstrap-overrides button {
+#home-buttons button {
     display: block;
     width: 300px;
     margin-top: 15px;

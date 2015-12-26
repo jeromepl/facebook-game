@@ -1,3 +1,4 @@
 app.controller('MainController', ['$scope', function($scope) {
-  $scope.title = 'Main Screen';
+    $scope.isHomeVisible = true;
+    $scope.isSendVisible = false;
 }]);
