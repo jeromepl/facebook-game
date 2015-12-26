@@ -1,0 +1,18 @@
+html {
+    width: 100%;
+}
+
+body {
+    width: 100%;
+}
+
+#bootstrap-overrides .container {
+    text-align: center;
+}
+
+#bootstrap-overrides button {
+    display: block;
+    width: 300px;
+    margin-top: 15px;
+    text-align: center;
+}
