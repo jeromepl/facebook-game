@@ -1,83 +1,93 @@
 <!DOCTYPE html>
 <html>
-    <head>
-    	<meta charset="utf-8">
-        <meta name="description" content="A Facebook Game">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>A Facebook Game</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="A Facebook Game">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- Bootstrap -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <title>A Facebook Game</title>
 
-        <!-- Styles -->
-        <link rel="stylesheet" href="css/app.css">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
-    </head>
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/app.css">
 
-    <body ng-app="facebookApp" id="bootstrap-overrides">
+</head>
 
-       <!-- Facebook Scripts -->
-        <script>
-            window.fbAsyncInit = function() {
+<body ng-app="facebookApp" id="bootstrap-overrides">
+
+    <!-- Facebook Scripts -->
+    <script>
+        window.fbAsyncInit = function () {
             FB.init({
-              appId      : '739207966223708',
-              xfbml      : true,
-              version    : 'v2.5'
+                appId: '739207966223708',
+                xfbml: true,
+                version: 'v2.5'
             });
 
             function onLogin(response) {
-              if (response.status == 'connected') {
-                FB.api('/me?fields=first_name', function(data) {
-                  var welcomeBlock = document.getElementById('fb-welcome');
-                  welcomeBlock.innerHTML = 'Hello, ' + data.first_name + '!';
-                });
-              }
+                if (response.status == 'connected') {
+                    FB.api('/me?fields=first_name', function (data) {
+                        var welcomeBlock = document.getElementById('fb-welcome');
+                        welcomeBlock.innerHTML = 'Hello, ' + data.first_name + '!';
+                    });
+                }
             }
 
-            FB.getLoginStatus(function(response) {
-              // Check login status on load, and if the user is
-              // already logged in, go directly to the welcome message.
-              if (response.status == 'connected') {
-                onLogin(response);
-              } else {
-                // Otherwise, show Login dialog first.
-                FB.login(function(response) {
-                  onLogin(response);
-                }, {scope: 'user_friends, email'});
-              }
+            FB.getLoginStatus(function (response) {
+                // Check login status on load, and if the user is
+                // already logged in, go directly to the welcome message.
+                if (response.status == 'connected') {
+                    onLogin(response);
+                } else {
+                    // Otherwise, show Login dialog first.
+                    FB.login(function (response) {
+                        onLogin(response);
+                    }, {
+                        scope: 'user_friends, email'
+                    });
+                }
             });
-          };
+        };
 
-          (function(d, s, id){
-             var js, fjs = d.getElementsByTagName(s)[0];
-             if (d.getElementById(id)) {return;}
-             js = d.createElement(s); js.id = id;
-             js.src = "//connect.facebook.net/en_US/sdk.js";
-             fjs.parentNode.insertBefore(js, fjs);
-           }(document, 'script', 'facebook-jssdk'));
-        </script>
-        <!-- End of facebook scripts -->
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {
+                return;
+            }
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <!-- End of facebook scripts -->
 
-        <div ng-view></div>
+    <div ng-view></div>
 
-        <!-- Libs -->
-        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
-        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.28/angular-route.min.js"></script>
+    <!-- Libs -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.28/angular-route.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-        <!-- Angular Modules -->
-        <script src="js/app.js"></script>
+    <!-- Angular Modules -->
+    <script src="js/app.js"></script>
 
-        <!-- Angular Controllers -->
-        <script src="js/controllers/MainController.js"></script>
-        <script src="js/controllers/HomeController.js"></script>
-        <script src="js/controllers/SendController.js"></script>
+    <!-- Angular Controllers -->
+    <script src="js/controllers/MainController.js"></script>
+    <script src="js/controllers/HomeController.js"></script>
+    <script src="js/controllers/SendController.js"></script>
 
-        <!-- Angular Directives -->
-        <script src="js/directives/homeView.js"></script>
-        <script src="js/directives/sendView.js"></script>
+    <!-- Angular Directives -->
+    <script src="js/directives/homeView.js"></script>
+    <script src="js/directives/sendView.js"></script>
 
-        <!-- Angular Services -->
-        <script src="js/services/facebookService.js"></script>
-    </body>
+    <!-- Angular Services -->
+    <script src="js/services/facebookService.js"></script>
+    <script src="js/services/pushService.js"></script>
+</body>
+
 </html>

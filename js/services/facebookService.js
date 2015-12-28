@@ -1,11 +1,10 @@
 app.factory('facebookService', function ($q) {
 
     return {
-        getMyLastName: function () {
+        getID: function () {
             var deferred = $q.defer();
 
-            FB.api('/me?fields=last_name', function (response) {
-                console.log(response.error);
+            FB.api('/me?fields=id', function (response) {
                 if (!response || response.error) {
                     deferred.reject('Error occured: ' + response.error.message);
                 } else {
@@ -13,13 +12,36 @@ app.factory('facebookService', function ($q) {
                 }
             });
             return deferred.promise;
-        }/*,
+        },
 
-        setFirstName: function () {
-            FB.api('/me?fields=first_name', function (data) {
-                var welcomeBlock = document.getElementById('fb-welcome');
-                welcomeBlock.innerHTML = 'Hello, ' + data.first_name + '!';
+        getFriends: function () {
+            var deferred = $q.defer();
+
+            FB.api('/me/friends?limit=5000', function (response) {
+                if (!response || response.error) {
+                    deferred.reject('Error occured: ' + response.error.message);
+                } else {
+                    deferred.resolve(response);
+                }
             });
-        }*/
+            return deferred.promise;
+        },
+
+        getAllFriends: function () {
+            var deferred = $q.defer();
+
+            FB.api('/me/taggable_friends?limit=5000', function (response) {
+                if (!response || response.error) {
+                    deferred.reject('Error occured: ' + response.error.message);
+                } else {
+                    deferred.resolve(response);
+                }
+            });
+            return deferred.promise;
+        },
+
+        getFriendPicture: function (friendID) {
+            return "https://graph.facebook.com/" + friendID + "/picture?type=square";
+        }
     };
 });

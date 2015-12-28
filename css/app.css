@@ -1,5 +1,6 @@
 html {
     width: 100%;
+    overflow-x: hidden;
 }
 
 body {
@@ -8,6 +9,7 @@ body {
 
 .center-block {
 	float: none;
+    text-align: center;
 }
 
 #bootstrap-overrides .container {
@@ -19,4 +21,16 @@ body {
     width: 300px;
     margin-top: 15px;
     text-align: center;
+}
+
+#bootstrap-overrides .row {
+    margin-top: 10px;
+}
+
+#bootstrap-overrides .btn.dropdown-toggle {
+    float: none;
+}
+
+#message {
+    resize: none;
 }
