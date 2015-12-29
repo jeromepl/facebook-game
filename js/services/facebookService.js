@@ -40,8 +40,8 @@ app.factory('facebookService', function ($q) {
             return deferred.promise;
         },
 
-        getFriendPicture: function (friendID) {
-            return "https://graph.facebook.com/" + friendID + "/picture?type=square";
+        getFriendPicture: function (friendID, type) {
+            return "https://graph.facebook.com/" + friendID + "/picture?type=" + type;
         }
     };
 });

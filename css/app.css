@@ -11,7 +11,7 @@ body {
     text-align: center;
 }
 
-#bootstrap-overrides .container {
+#bootstrap-override .container {
     text-align: center;
 }
 
@@ -22,11 +22,11 @@ body {
     text-align: center;
 }
 
-#bootstrap-overrides .row {
+#bootstrap-override .row {
     margin-top: 10px;
 }
 
-#bootstrap-overrides .btn.dropdown-toggle {
+#bootstrap-override .btn.dropdown-toggle {
     float: none;
 }
 
@@ -46,6 +46,7 @@ body {
     display: inline-block;
     border: solid 1px black;
     margin-right: 20px;
+    cursor: pointer;
 }
 
 .mugshot img {
@@ -99,5 +100,21 @@ body {
 /* End of animation code*/
 
 #receive-back-btn {
-    margin-top: 25px;
+    margin-top: 20px;
+}
+
+#receive-btn-group {
+    margin-top: 20px;
+}
+
+#receive-btn-group .btn:first-of-type {
+    margin-right: 5px;
+}
+
+#receive-btn-group .btn:nth-of-type(2) {
+    margin-left: 5px;
+}
+
+#bootstrap-override .btn:disabled {
+    cursor: default;
 }

@@ -56,7 +56,7 @@ app.controller('SendController', ['$scope', '$location', 'facebookService', 'pus
         if(friends) {
             for(var i = 0; i < friends.length; i++) {
                 if(friends[i].name.toLowerCase().indexOf(name.toLowerCase()) > -1) { //Check if the name contains the typed text (case insensitive)
-                    $scope.friendMatches.push({id: friends[i].id, name: friends[i].name, picture: facebookService.getFriendPicture(friends[i].id)});
+                    $scope.friendMatches.push({id: friends[i].id, name: friends[i].name, picture: facebookService.getFriendPicture(friends[i].id, "square")});
                 }
             }
         }
