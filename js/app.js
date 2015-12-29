@@ -11,6 +11,10 @@ app.config(function ($routeProvider) {
             controller: 'SendController',
             templateUrl: 'views/sendView.html'
         })
+        .when('/receiveMessage/', {
+            controller: 'ReceiveController',
+            templateUrl: 'views/receiveView.html'
+        })
         .otherwise({
             redirectTo: '/'
         });

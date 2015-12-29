@@ -51,7 +51,7 @@ app.controller('SendController', ['$scope', '$location', 'facebookService', 'pus
     };
 
     function searchFriends(name) {
-        $scope.matches = [];
+        $scope.friendMatches = [];
 
         if(friends) {
             for(var i = 0; i < friends.length; i++) {

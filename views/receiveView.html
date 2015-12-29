@@ -1,0 +1,10 @@
+<h2 class="center-block">Here are your messages:</h2>
+<h3 class="center-block">Message:</h3>
+<p class="center-block">{{ message }}</p>
+<div id="mugshots" class="center-block">
+    <div ng-repeat="picture in pictures track by $index" class="mugshot">
+        <img ng-src="{{ picture }}">
+    </div>
+</div>
+
+<button id="receive-back-btn" class="btn btn-default center-block" ng-click="back()">Back</button>
