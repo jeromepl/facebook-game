@@ -7,8 +7,9 @@ body {
     width: 100%;
 }
 
-.center-block {
+#bootstrap-override .center-block {
     text-align: center;
+    float: none;
 }
 
 #bootstrap-override .container {
@@ -47,6 +48,10 @@ body {
     border: solid 1px black;
     margin-right: 20px;
     cursor: pointer;
+}
+
+.mugshot.selected {
+    outline: 3px #28c75e solid;
 }
 
 .mugshot img {
@@ -107,14 +112,23 @@ body {
     margin-top: 20px;
 }
 
-#receive-btn-group .btn:first-of-type {
-    margin-right: 5px;
+#receive-btn-group .btn {
+    width: 85px;
+    margin-left: 10px;
 }
 
-#receive-btn-group .btn:nth-of-type(2) {
-    margin-left: 5px;
+#receive-btn-group .btn:first-of-type {
+    margin-left: 0;
 }
 
 #bootstrap-override .btn:disabled {
     cursor: default;
+}
+
+#guess-answer.right {
+	color: #62d06a;
+}
+
+#guess-answer.wrong {
+	color: #e23838;
 }

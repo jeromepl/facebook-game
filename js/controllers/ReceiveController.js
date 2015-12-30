@@ -3,8 +3,13 @@ app.controller('ReceiveController', ['$scope', '$location', 'facebookService', '
     $scope.message = "Loading...";
     $scope.pictures = ['img/loop.png', 'img/loop.png', 'img/loop.png', 'img/loop.png', 'img/loop.png'];
 
-    $scope.currentMessage = 0;
+    $scope.currentMessageIndex = 0;
     $scope.numMessages = 0;
+    var currentMessageId = 0;
+
+    $scope.selected = null; //To guess
+    $scope.guessAnswer = "wrong"; //Use as a CSS class to style the guess message. Either "right" or "wrong"
+    $scope.guessMessage = null;
 
     //Load the first message:
     var messages = [];
@@ -19,16 +24,37 @@ app.controller('ReceiveController', ['$scope', '$location', 'facebookService', '
     });
 
     $scope.previous = function() {
-        if($scope.currentMessage > 0) {
-            $scope.currentMessage--;
-            loadMessage($scope.currentMessage);
+        if($scope.currentMessageIndex > 0) {
+            loadMessage($scope.currentMessageIndex - 1);
         }
     };
 
     $scope.next = function() {
-        if($scope.currentMessage < $scope.numMessages - 1) {
-            $scope.currentMessage++;
-            loadMessage($scope.currentMessage);
+        if($scope.currentMessageIndex < $scope.numMessages - 1) {
+            loadMessage($scope.currentMessageIndex + 1);
+        }
+    };
+
+    $scope.select = function(index) {
+        $scope.selected = index;
+    };
+
+    $scope.guess = function() {
+        if($scope.selected != null) {
+            pullService.guess(currentMessageId, $scope.selected).then(function(response) {
+                if(response.data == 'true') {
+                    $scope.guessAnswer = "right";
+                    $scope.guessMessage = "You guessed right!!";
+                }
+                else {
+                    $scope.guessAnswer = "wrong";
+                    $scope.guessMessage = "Sorry, you guessed wrong!";
+                }
+            }, function(response) {
+                $scope.guessAnswer = "wrong"; //Will display the message in red
+                $scope.guessMessage = "Hmmm... An error occured...";
+                console.log("Error: " + response);
+            });
         }
     };
 
@@ -37,9 +63,30 @@ app.controller('ReceiveController', ['$scope', '$location', 'facebookService', '
         $location.path("/");
     };
 
+    //Used to add the "selected" class to one of the mugshots
+    $scope.isSelected = function(index) {
+        if(index == $scope.selected) {
+            return "selected";
+        }
+        return "";
+    };
+
     function loadMessage(index) {
+        var previousMessage = $scope.currentMessageIndex;
+
+        $scope.currentMessageIndex = index;
         $scope.message = messages[index].message;
         loadPictures(messages[index].friends);
+        currentMessageId = messages[index].id;
+
+        //Delete the previous message if it was guessed
+        if($scope.guessMessage) {
+            removeMessage(previousMessage);
+        }
+
+        //Reset
+        $scope.guessMessage = null;
+        $scope.selected = null; //Deselect everything
     }
 
     //Takes the friend ids and gets their pictures to put in the $scope.pictures
@@ -52,5 +99,14 @@ app.controller('ReceiveController', ['$scope', '$location', 'facebookService', '
                     $scope.pictures[i] = 'img/question-mark.png'; //Occurs when user doesn't have enough friends to fill all spots
             }
         }
+    }
+
+    //We need to remove messages that have been guessed when the user clicks on "previous" or "next"
+    function removeMessage(index) {
+        messages.splice(index, 1);
+        $scope.numMessages = messages.length; //Update the total message count
+
+        if($scope.currentMessageIndex > index) //The index changes for everything after the deleted message
+            $scope.currentMessageIndex--;
     }
 }]);

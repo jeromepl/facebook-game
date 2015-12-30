@@ -8,6 +8,13 @@ app.factory('pullService', ['$http', 'facebookService', function ($http, faceboo
                     url: 'server_side/getMessages.php?user_id=' + response.id
                 }); //Returns a promise with the response
             });
+        },
+
+        guess: function(messageId, guess) {
+            return $http({
+                method: 'GET',
+                url: 'server_side/guess.php?message_id=' + messageId + '&guess=' + guess
+            });
         }
     };
 }]);
