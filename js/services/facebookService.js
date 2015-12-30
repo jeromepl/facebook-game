@@ -14,7 +14,7 @@ app.factory('facebookService', function ($q) {
             return deferred.promise;
         },
 
-        getFriends: function () {
+        getFriends: function () { //Only returns friends who logged in this app
             var deferred = $q.defer();
 
             FB.api('/me/friends?limit=5000', function (response) {
@@ -27,7 +27,7 @@ app.factory('facebookService', function ($q) {
             return deferred.promise;
         },
 
-        getAllFriends: function () {
+        getAllFriends: function () { //Uses "taggable friends" in order to get friends that do not use this app
             var deferred = $q.defer();
 
             FB.api('/me/taggable_friends?limit=5000', function (response) {

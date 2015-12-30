@@ -1,4 +1,4 @@
-var app = angular.module("facebookApp", ['ngRoute']);
+var app = angular.module("facebookApp", ['ngRoute', 'facebookInit']);
 
 //Routing
 app.config(function ($routeProvider) {

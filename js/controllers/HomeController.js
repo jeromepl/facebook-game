@@ -1,4 +1,10 @@
-app.controller('HomeController', ['$scope', '$location', function($scope, $location) {
+app.controller('HomeController', ['$scope', '$location', 'facebookInit', function($scope, $location, facebookInit) {
+
+    $scope.fbLoaded = false;
+
+    facebookInit.deferred.then(function() {
+        $scope.fbLoaded = true;
+    });
 
     $scope.sendMessage = function() {
         $location.path("/sendMessage");

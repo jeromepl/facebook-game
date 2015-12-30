@@ -50,7 +50,7 @@ app.controller('ReceiveController', ['$scope', '$location', 'facebookService', '
                     $scope.guessAnswer = "wrong";
                     $scope.guessMessage = "Sorry, you guessed wrong!";
                 }
-            }, function(response) {
+            }, function(response) { //Error!
                 $scope.guessAnswer = "wrong"; //Will display the message in red
                 $scope.guessMessage = "Hmmm... An error occured...";
                 console.log("Error: " + response);
