@@ -1,9 +1,11 @@
-app.controller('HomeController', ['$scope', '$location', 'facebookInit', function($scope, $location, facebookInit) {
+app.controller('HomeController', ['$scope', '$location', 'facebookService', function($scope, $location, facebookService) {
 
-    $scope.fbLoaded = false;
+    $scope.firstName = "";
 
-    facebookInit.deferred.then(function() {
-        $scope.fbLoaded = true;
+    facebookService.getFirstName().then(function(response) {
+         $scope.firstName = response;
+    }, function(response) {
+        console.log(response);
     });
 
     $scope.sendMessage = function() {

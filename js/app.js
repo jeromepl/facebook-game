@@ -5,15 +5,30 @@ app.config(function ($routeProvider) {
     $routeProvider
         .when('/', {
             controller: 'HomeController',
-            templateUrl: 'views/homeView.html'
+            templateUrl: 'views/homeView.html',
+            resolve: { //Wait for facebook to initialize before instantiating the controller
+                'fbLoaded': function(facebookInit) {
+                    return facebookInit.logged;
+                }
+            }
         })
         .when('/sendMessage/', {
             controller: 'SendController',
-            templateUrl: 'views/sendView.html'
+            templateUrl: 'views/sendView.html',
+            resolve: {
+                'fbLoaded': function(facebookInit) {
+                    return facebookInit.logged;
+                }
+            }
         })
         .when('/receiveMessage/', {
             controller: 'ReceiveController',
-            templateUrl: 'views/receiveView.html'
+            templateUrl: 'views/receiveView.html',
+            resolve: {
+                'fbLoaded': function(facebookInit) {
+                    return facebookInit.logged;
+                }
+            }
         })
         .otherwise({
             redirectTo: '/'

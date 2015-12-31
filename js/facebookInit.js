@@ -3,13 +3,14 @@ angular.module('facebookInit', [])
 
         function init() {
             $rootScope.$apply(function () {
-                deferred.resolve();
+                deferred1.resolve();
             });
         }
 
-        var deferred = $q.defer();
+        var deferred1 = $q.defer(); //When facebook calls fbAsyncInit
+        var deferred2 = $q.defer(); //The final promise that needs to be solved
 
-        deferred.promise.then(function () {
+        deferred1.promise.then(function () {
             FB.init({
                 appId: '739207966223708',
                 xfbml: true,
@@ -19,10 +20,10 @@ angular.module('facebookInit', [])
 
             function onLogin(response) {
                 if (response.status == 'connected') {
-                    FB.api('/me?fields=first_name', function (data) {
-                        var welcomeBlock = document.getElementById('fb-welcome');
-                        welcomeBlock.innerHTML = 'Hello, ' + data.first_name + '!';
-                    });
+                    deferred2.resolve(response);
+                }
+                else {
+                    deferred2.reject('Error occured: ' + response);
                 }
             }
 
@@ -54,6 +55,7 @@ angular.module('facebookInit', [])
         }(document));
 
         return {
-            deferred: deferred.promise //A promise resolved when FB has loaded
+            instantiated: deferred1.promise, //A promise resolved when FB has loaded
+            logged: deferred2.promise //A promise resolved when FB user is logged in
         }
 }]);

@@ -13,7 +13,7 @@ app.controller('SendController', ['$scope', '$location', 'facebookService', 'pus
         if(!retrievingFriends) {
             retrievingFriends = true;
             facebookService.getFriends().then(function (response) {
-                friends = response.data;
+                friends = response;
                 searchFriends($scope.sendTo);
             });
         }

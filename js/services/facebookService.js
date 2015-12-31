@@ -1,4 +1,4 @@
-app.factory('facebookService', function ($q) {
+app.factory('facebookService', ['$q', function ($q) {
 
     return {
         getID: function () {
@@ -8,7 +8,20 @@ app.factory('facebookService', function ($q) {
                 if (!response || response.error) {
                     deferred.reject('Error occured: ' + response.error.message);
                 } else {
-                    deferred.resolve(response);
+                    deferred.resolve(response.id);
+                }
+            });
+            return deferred.promise;
+        },
+
+        getFirstName: function() {
+            var deferred = $q.defer();
+
+            FB.api('/me?fields=first_name', function (response) {
+                if (!response || response.error) {
+                    deferred.reject('Error occured: ' + response.error.message);
+                } else {
+                    deferred.resolve(response.first_name);
                 }
             });
             return deferred.promise;
@@ -21,7 +34,7 @@ app.factory('facebookService', function ($q) {
                 if (!response || response.error) {
                     deferred.reject('Error occured: ' + response.error.message);
                 } else {
-                    deferred.resolve(response);
+                    deferred.resolve(response.data);
                 }
             });
             return deferred.promise;
@@ -34,7 +47,7 @@ app.factory('facebookService', function ($q) {
                 if (!response || response.error) {
                     deferred.reject('Error occured: ' + response.error.message);
                 } else {
-                    deferred.resolve(response);
+                    deferred.resolve(response.data);
                 }
             });
             return deferred.promise;
@@ -44,4 +57,4 @@ app.factory('facebookService', function ($q) {
             return "https://graph.facebook.com/" + friendID + "/picture?type=" + type;
         }
     };
-});
+}]);
