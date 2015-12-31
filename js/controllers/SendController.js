@@ -23,7 +23,7 @@ app.controller('SendController', ['$scope', '$location', 'facebookService', 'pus
     };
 
     $scope.send = function() {
-        if($scope.selectedFriend && $scope.message.length > 0) { //TODO add a minimum length?
+        if($scope.selectedFriend && $scope.message && $scope.message.length > 0) { //TODO add a minimum length?
             pushService.sendMessage($scope.selectedFriend.id, $scope.message).then(function(response) { //TODO remove .then() (used to test pushService atm)
                 console.log(response.data);
             }, function(response) {

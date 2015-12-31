@@ -6,7 +6,7 @@ app.config(function ($routeProvider) {
         .when('/', {
             controller: 'HomeController',
             templateUrl: 'views/homeView.html',
-            resolve: { //Wait for facebook to initialize before instantiating the controller
+            resolve: { //Wait for facebook to initialize and for the user to log in before instantiating the controller
                 'fbLoaded': function(facebookInit) {
                     return facebookInit.logged;
                 }
