@@ -70,6 +70,7 @@ app.controller('ReceiveController', ['$scope', '$location', '$routeParams', 'fac
 
     //Go back to the home page
     $scope.back = function() {
+        $location.search('msg', null); //Need to clear the msg id otherwise the home controller will send us back to this page
         $location.path("/app.html/");
     };
 
