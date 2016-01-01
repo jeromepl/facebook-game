@@ -5,7 +5,7 @@ app.factory('pushService', ['$http', 'facebookService', function ($http, faceboo
             return facebookService.getID().then(function(response) {
                 return $http({
                     method: 'GET',
-                    url: 'server_side/sendMessage.php?user_id=' + response.id + '&friend_id=' + friendID + '&message=' + message
+                    url: 'server_side/sendMessage.php?user_id=' + response + '&friend_id=' + friendID + '&message=' + message
                 }); //Returns a promise with the response
             });
         }

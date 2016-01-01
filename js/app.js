@@ -1,9 +1,10 @@
 var app = angular.module("facebookApp", ['ngRoute', 'facebookInit']);
 
 //Routing
-app.config(function ($routeProvider) {
+app.config(function ($locationProvider, $routeProvider) {
+    $locationProvider.html5Mode(true);
     $routeProvider
-        .when('/', {
+        .when('/app.html/', { //Can't simply be '/' for some reason since I can't seem to get access to the params in the URL that way
             controller: 'HomeController',
             templateUrl: 'views/homeView.html',
             resolve: { //Wait for facebook to initialize and for the user to log in before instantiating the controller
@@ -21,7 +22,7 @@ app.config(function ($routeProvider) {
                 }
             }
         })
-        .when('/receiveMessage/', {
+        .when('/receiveMessage/:id?', {
             controller: 'ReceiveController',
             templateUrl: 'views/receiveView.html',
             resolve: {
@@ -31,6 +32,6 @@ app.config(function ($routeProvider) {
             }
         })
         .otherwise({
-            redirectTo: '/'
+            redirectTo: '/app.html/'
         });
 });

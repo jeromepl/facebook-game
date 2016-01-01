@@ -1,4 +1,4 @@
-app.controller('ReceiveController', ['$scope', '$location', 'facebookService', 'pullService', function($scope, $location, facebookService, pullService) {
+app.controller('ReceiveController', ['$scope', '$location', '$routeParams', 'facebookService', 'pullService', function($scope, $location, $routeParams, facebookService, pullService) {
 
     $scope.message = "Loading...";
     $scope.pictures = ['img/loop.png', 'img/loop.png', 'img/loop.png', 'img/loop.png', 'img/loop.png'];
@@ -17,8 +17,18 @@ app.controller('ReceiveController', ['$scope', '$location', 'facebookService', '
         messages = response.data;
         $scope.numMessages = messages.length;
 
-        if($scope.numMessages > 0)
-            loadMessage(0); //Show the first message
+        if($scope.numMessages > 0) {
+            if($routeParams.id) { //User redirected from notifications. Wants to see a specific message
+                var index = findMessageIndex($routeParams.id);
+                if(index)
+                    loadMessage(index);
+                else //findMessageIndex returned null because it didn't find the message
+                    loadMessage(0);
+            }
+            else {
+                loadMessage(0); //Show the first message
+            }
+        }
     }, function(response) {
         console.log("An error occured: " + response);
     });
@@ -60,7 +70,7 @@ app.controller('ReceiveController', ['$scope', '$location', 'facebookService', '
 
     //Go back to the home page
     $scope.back = function() {
-        $location.path("/");
+        $location.path("/app.html/");
     };
 
     //Used to add the "selected" class to one of the mugshots
@@ -108,5 +118,14 @@ app.controller('ReceiveController', ['$scope', '$location', 'facebookService', '
 
         if($scope.currentMessageIndex > index) //The index changes for everything after the deleted message
             $scope.currentMessageIndex--;
+    }
+
+    function findMessageIndex(messageId) {
+        for(var i = 0; i < messages.length; i++) {
+            if(messages[i].id == messageId)
+                return i;
+        }
+
+        return null; //If the message wasn't found
     }
 }]);

@@ -1,7 +1,10 @@
-app.controller('HomeController', ['$scope', '$location', 'facebookService', 'pullService', function($scope, $location, facebookService, pullService) {
+app.controller('HomeController', ['$scope', '$location', '$routeParams', 'facebookService', 'pullService', function($scope, $location, $routeParams, facebookService, pullService) {
 
     $scope.firstName = "";
     $scope.numMessages = "no"; //Used to display the number of pending messages. "no" is the same as 0 messages pending
+
+    if($routeParams.msg) //User has been redirected from a notification. Need to send him to the receiveMessage page
+        $location.path('/receiveMessage/' + $routeParams.msg); //$routeParams.msg contains the message id
 
     facebookService.getFirstName().then(function(response) {
          $scope.firstName = response;
