@@ -22,9 +22,18 @@ app.config(function ($locationProvider, $routeProvider) {
                 }
             }
         })
-        .when('/receiveMessage/:id?', {
+        .when('/receiveMessage/', {
             controller: 'ReceiveController',
             templateUrl: 'views/receiveView.html',
+            resolve: {
+                'fbLoaded': function(facebookInit) {
+                    return facebookInit.logged;
+                }
+            }
+        })
+        .when('/chat/:id', {
+            controller: 'ChatController',
+            templateUrl: 'views/chatView.html',
             resolve: {
                 'fbLoaded': function(facebookInit) {
                     return facebookInit.logged;

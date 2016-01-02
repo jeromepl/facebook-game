@@ -29,7 +29,7 @@ app.controller('SendController', ['$scope', '$location', 'facebookService', 'pus
             }, function(response) {
                 console.log('Error: ' + response.data);
             }).finally(function() {
-                $location.path("/"); //TODO return confirmation message (or error) to show on the home screen
+                $location.path("/app.html/"); //TODO return confirmation message (or error) to show on the home screen
             });
         }
     };
@@ -53,7 +53,7 @@ app.controller('SendController', ['$scope', '$location', 'facebookService', 'pus
     function searchFriends(name) {
         $scope.friendMatches = [];
 
-        if(friends) {
+        if(friends && name) {
             for(var i = 0; i < friends.length; i++) {
                 if(friends[i].name.toLowerCase().indexOf(name.toLowerCase()) > -1) { //Check if the name contains the typed text (case insensitive)
                     $scope.friendMatches.push({id: friends[i].id, name: friends[i].name, picture: facebookService.getFriendPicture(friends[i].id, "square")});

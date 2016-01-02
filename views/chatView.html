@@ -1,0 +1,30 @@
+<h3 class="center-block">Message:</h3>
+<p class="center-block">{{ message }}</p>
+
+<div class="center-block">
+    <div ng-repeat="picture in guessPictures track by $index" class="mugshot">
+        <img ng-src="{{ picture }}">
+    </div>
+    <button class="btn btn-default" ng-click="guess()">New Guess</button>
+</div>
+
+<div id="chat-box" class="center-block">
+    <!-- Chat box -->
+</div>
+
+<div class="row">
+    <div class="col-xs-6 col-xs-offset-3">
+        <!-- Only one of the next 2 divs should be rendered, depending on whether the user is the sender or the receiver -->
+        <div id="receive-btn-group" ng-show="sender" class="center-block input-group">
+            <button class="btn btn-default" ng-click="answer(true)">Yes</button>
+            <button class="btn btn-default" ng-click="answer(false)">No</button>
+        </div>
+        <div id="receive-btn-group" ng-show="!sender" class="center-block input-group">
+            <input type="text" ng-model="question" autocomplete="off" class="form-control">
+            <button class="btn btn-default" ng-click="ask()">Ask</button>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <button class="btn btn-default center-block" ng-click="back()">Back</button>
+</div>

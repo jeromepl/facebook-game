@@ -1,6 +1,7 @@
 <h1 class="center-block">Hello, {{ firstName }}!</h1>
 
 <div id="home-buttons" class="center-block">
-    <button class="btn btn-default center-block" ng-click="sendMessage()">Send a Message</button>
-    <button class="btn btn-default center-block" ng-disabled="numMessages == 'no'" ng-click="receiveMessage()">You have {{ numMessages }} new message(s)</button>
+    <button class="btn btn-default center-block" ng-click="sendMessage()">Start a Game</button>
+    <button class="btn btn-default center-block" ng-disabled="numMessages == 0" ng-click="receiveMessage()">Active Games ({{ numMessages }})</button>
+    <button class="btn btn-default center-block" ng-click="inviteFriends()">Invite Friends</button>
 </div>
