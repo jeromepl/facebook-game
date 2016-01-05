@@ -1,6 +1,6 @@
 <h3 class="center-block">Active Games:</h3>
 <button ng-repeat="message in messages track by $index" ng-click="select($index)" class="btn btn-default center-block receive-message">
-    <h4 class="receive-message-message">{{ message.message }}</h4>
+    <h4 ng-class="message.sender" class="receive-message-message">{{ message.message }}</h4>
     <h5 class="receive-message-date">{{ message.time | date }}</h5>
 </button>
 

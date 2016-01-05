@@ -16,6 +16,10 @@ body {
     text-align: center;
 }
 
+#bootstrap-override button:disabled, #bootstrap-override input:disabled {
+    cursor: default;
+}
+
 /* HOME */
 #home-buttons button {
     display: block;
@@ -43,6 +47,14 @@ body {
     margin-right: 5px;
 }
 
+.receive-message-message.receiver {
+    color: #5bc457;
+}
+
+.receive-message-message.sender {
+    color: #ed3e3e;
+}
+
 .receive-message-date {
     display: inline-block;
 }
@@ -65,4 +77,42 @@ body {
     height: 460px;
     border: solid 2px black;
     border-radius: 2px;
+    overflow-y: scroll;
+}
+
+.chat-item-set {
+	height: 90px;
+}
+
+.chat-item {
+    margin: 7px;
+    padding: 5px;
+    border-radius: 4px;
+    border: solid 1px #AAA;
+}
+
+.chat-question {
+    float: left;
+    background-color: #bdf0bb;
+}
+
+.chat-answer {
+    float: right;
+    margin-top: 45px;
+    background-color: #e89b9b;
+}
+
+#chat-receiver-picture {
+    width: 60px;
+    height: 60px;
+}
+
+#chat-btn-group input {
+    width: 250px;
+}
+
+#chat-btn-group label {
+    margin-left: -16px;
+    margin-right: 10px;
+    font-size: 22px;
 }

@@ -11,9 +11,11 @@ app.factory('pullService', ['$http', 'facebookService', function ($http, faceboo
         },
 
         getMessage: function(messageId) {
-            return $http({
-                method: 'GET',
-                url: 'server_side/getMessage.php?message_id=' + messageId
+            return facebookService.getID().then(function(response) {
+                return $http({
+                    method: 'GET',
+                    url: 'server_side/getMessage.php?user_id=' + response + '&message_id=' + messageId
+                });
             });
         },
 

@@ -5,23 +5,29 @@
     <div ng-repeat="picture in guessPictures track by $index" class="mugshot">
         <img ng-src="{{ picture }}">
     </div>
-    <button class="btn btn-default" ng-click="guess()">New Guess</button>
+    <img id="chat-receiver-picture" ng-show="sender" ng-src="{{ receiverPicture }}">
+    <button class="btn btn-default" ng-show="!sender" ng-click="guess()">New Guess</button>
 </div>
 
 <div id="chat-box" class="center-block">
     <!-- Chat box -->
+    <div ng-repeat="question in chat track by $index" class="chat-item-set">
+        <div class="chat-item chat-question">{{ question.question }}</div>
+        <div class="chat-item chat-answer" ng-show="question.answer">{{ question.answer }}</div>
+    </div>
 </div>
 
 <div class="row">
     <div class="col-xs-6 col-xs-offset-3">
         <!-- Only one of the next 2 divs should be rendered, depending on whether the user is the sender or the receiver -->
-        <div id="receive-btn-group" ng-show="sender" class="center-block input-group">
-            <button class="btn btn-default" ng-click="answer(true)">Yes</button>
-            <button class="btn btn-default" ng-click="answer(false)">No</button>
+        <div id="chat-btn-group" ng-show="sender" class="center-block input-group">
+            <button class="btn btn-default" ng-disabled="chat[chat.length - 1].answer || chat.length == 0" ng-click="answer(true)">Yes</button>
+            <button class="btn btn-default" ng-disabled="chat[chat.length - 1].answer || chat.length == 0" ng-click="answer(false)">No</button>
         </div>
-        <div id="receive-btn-group" ng-show="!sender" class="center-block input-group">
-            <input type="text" ng-model="question" autocomplete="off" class="form-control">
-            <button class="btn btn-default" ng-click="ask()">Ask</button>
+        <div id="chat-btn-group" ng-show="!sender" class="center-block input-group">
+            <input type="text" ng-model="question" maxlength="144" autocomplete="off" ng-disabled="!chat[chat.length - 1].answer && chat.length != 0" class="form-control">
+            <label>?</label>
+            <button class="btn btn-default" ng-disabled="!chat[chat.length - 1].answer && chat.length != 0" ng-click="ask()">Ask</button>
         </div>
     </div>
 </div>
